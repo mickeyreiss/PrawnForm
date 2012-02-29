@@ -16,8 +16,6 @@ module PrawnForm
       VALID_TYPES = [:boolean, :text, :multiline]
 
       def initialize(data, pdf)
-        puts "INITIALIZING DSL ENGINE"
-
         @pdf = pdf
 
         @data = data
@@ -32,7 +30,6 @@ module PrawnForm
 
         type = type_for(value, options[:type])
 
-        puts "dealing with field #{field_name} = #{value} of type #{type}"
         case type
           when :boolean
             field = BooleanField.new(@pdf)

@@ -12,7 +12,6 @@ module PrawnForm
     # Represent text fields
     class TextField < Field
       def render!
-        puts "rendering text field at #{self.coordinates.inspect}"
         @pdf.text_box(self.value.to_s, :at => self.coordinates)
       end
     end
@@ -22,7 +21,6 @@ module PrawnForm
       attr_accessor :width, :leading, :height
 
       def render!
-        puts 'rendering multiline field'
         @pdf.text_box(self.value.to_s, :at => self.coordinates, :leading => self.leading, :width => self.width, :height => self.height, :overflow => :shrink_to_fit)
       end
     end
@@ -30,7 +28,6 @@ module PrawnForm
     # represent boolean fields
     class BooleanField < Field
       def render!
-        puts 'rendering boolean field'
         @pdf.text_box(self.value ? 'x' : "", :at => self.coordinates)
       end
     end
