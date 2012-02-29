@@ -10,6 +10,21 @@ This gem works with Prawn to generate PDFs, and it requires that the original fo
 2. Define form
 3. Generate pdf (using form as template) and call #form
 
+```
+@data = {
+  #... => ...
+}
+include PrawnForm::DSL
+Prawn::Document.generate :template => "form.pdf" do |pdf|
+# OR: pdf = Prawn::Docuemnt.new
+
+  pdf.form :data => @data do |f|
+    # Form definition here!
+  end
+end
+
+```
+
 ### Valid Types
 text
 multiline
