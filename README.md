@@ -1,6 +1,14 @@
 Prawn based form filler
 
 ## DESCRIPTION
+This Gem allows you to describe a fillable paper form using a simple DSL. Then, you can fill out the form by supplying the appropriate data.
+
+This gem works with Prawn to generate PDFs, and it requires that the original form is in PDF format.
+
+## BASIC USAGE
+1. Define data
+2. Define form
+3. Generate pdf (using form as template) and call #form
 
 ### Valid Types
 text
@@ -17,7 +25,9 @@ boolean (checkbox)
 
 ## THE DSL (BY EXAMPLE)
 ```
-prawn_form :form => "paymentrequest11-12.pdf", :data => @payment_request do |f|
+pdf = Prawn::Document.new :template => "form.pdf"
+
+pdf.form :data => @payment_request do |f|
   #SUBMITTER
   f.organization_name "167x305"
   f.submitter_name "162x347"
