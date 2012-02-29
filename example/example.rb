@@ -1,7 +1,5 @@
-require '../lib/prawn_form'
-require '../lib/prawn'
 require 'rubygems'
-require 'prawn'
+require 'prawn_form'
 
 include PrawnForm::DSL
 
@@ -29,33 +27,32 @@ include PrawnForm::DSL
 }
 
 Prawn::Document.generate "output.pdf", :template => "paymentrequest2011-12.pdf" do |pdf|
+  pdf.form :data => @payment_request do |f|
+    #SUBMITTER
+    f.organization_name "130x463"
+    f.submitter_name "128x421"
+    f.authorized_signer "119x394"
+    f.date "390x491"
+    f.org "430x465", :type => :boolean
+    f.org_amount "480x463"
+    f.gift "430x441" #:type => :boolean
+    f.gift_amount "480x439"
+    f.andrew_id "413x422"
 
-pdf.form :data => @payment_request do |f|
-  #SUBMITTER
-  f.organization_name "130x463"
-  f.submitter_name "128x421"
-  f.authorized_signer "119x394"
-  f.date "390x491"
-  f.org "430x465", :type => :boolean
-  f.org_amount "480x463"
-  f.gift "430x441" #:type => :boolean
-  f.gift_amount "480x439"
-  f.andrew_id "413x422"
+    #PAYEE
+    f.payee_name "70x341"
+    f.payee_address_line_1 "111x308"
+    f.payee_address_line_2 "111x284"
+    f.payee_address_line_3 "111x258"
 
-  #PAYEE
-  f.payee_name "70x341"
-  f.payee_address_line_1 "111x308"
-  f.payee_address_line_2 "111x284"
-  f.payee_address_line_3 "111x258"
+    f.business_contact "185x229"
+    f.business_email "420x229"
+    f.business_phone "37x207"
+    f.business_fax "351x207"
 
-  f.business_contact "185x229"
-  f.business_email "420x229"
-  f.business_phone "37x207"
-  f.business_fax "351x207"
-
-  # PURCHASE DETAILS
-  f.purchase_details "0x143", :type => :multiline, :height => 55.5
-  f.due_date "134x76"
-  f.amount_due "81x36"
-end
+    # PURCHASE DETAILS
+    f.purchase_details "0x143", :type => :multiline, :height => 55.5
+    f.due_date "134x76"
+    f.amount_due "81x36"
+  end
 end
